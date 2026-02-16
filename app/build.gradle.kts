@@ -1,3 +1,5 @@
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -54,6 +56,9 @@ dependencies {
 
     // Makes HTTP API calls easily
     implementation(libs.retrofit)
+
+
+    implementation(libs.glide)
 
     // Converts JSON response into Kotlin data classes
     implementation(libs.converter.gson)
