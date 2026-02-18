@@ -35,10 +35,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 putString("description", article.description)
                 putString("image", article.image_url)
                 putString("link", article.link)
+                putString("source_icon", article.source_icon)
+                putString("datatype", article.datatype)
             }
-
+            val detailsFragment = NewsDetailsPage()
+            detailsFragment.arguments = bundle
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, NewsDetailsPage())
+                .replace(R.id.fragment_container, detailsFragment)
                 .addToBackStack(null)
                 .commit()
             // Uncomment if using Navigation Component

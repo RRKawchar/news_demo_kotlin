@@ -76,7 +76,7 @@
                     android:padding="4dp"/>
 
                 <TextView
-                    android:id="@+id/tvDatatype"
+                    android:id="@+id/tvNewsType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
