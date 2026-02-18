@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.news_app_kotlin.R
 import com.example.news_app_kotlin.ui.common.UiState
+import com.example.news_app_kotlin.ui.details.NewsDetailsPage
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -35,6 +36,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 putString("image", article.image_url)
                 putString("link", article.link)
             }
+
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, NewsDetailsPage())
+                .addToBackStack(null)
+                .commit()
             // Uncomment if using Navigation Component
             // findNavController().navigate(R.id.action_homeFragment_to_detailsFragment, bundle)
         }
