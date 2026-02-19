@@ -17,7 +17,9 @@ class HomeViewModel : ViewModel() {
     private val _news = MutableLiveData<Response<NewsResponse>>()
     val news: LiveData<Response<NewsResponse>> = _news
 
+
     fun fetchNews() {
+        if (_newsState.value is UiState.Success) return
         viewModelScope.launch {
             _newsState.value = UiState.Loading
 
@@ -28,6 +30,7 @@ class HomeViewModel : ViewModel() {
                if(response.isSuccessful){
                    val articles = response.body()?.results ?: emptyList()
                    _newsState.value = UiState.Success(articles)
+
                } else {
                    _newsState.value = UiState.Error("Something went wrong")
                }

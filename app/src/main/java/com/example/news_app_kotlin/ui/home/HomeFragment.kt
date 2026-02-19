@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ import com.example.news_app_kotlin.ui.details.NewsDetailsPage
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var newsAdapter: NewsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,8 +26,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvNews)
 
-        // 2️ Initialize ViewModel
-        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
         // 3️ Initialize Adapter with click listener
         newsAdapter = NewsAdapter { article ->
