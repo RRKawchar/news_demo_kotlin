@@ -1,5 +1,7 @@
 package com.example.news_app_kotlin.ui.categories
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.news_app_kotlin.R
 import com.example.news_app_kotlin.data.remote.models.Category
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 
 class CategoriesAdapter(private val list: List<Category>) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
@@ -26,6 +29,13 @@ class CategoriesAdapter(private val list: List<Category>) : RecyclerView.Adapter
         holder.txtCategory.text = category.name
 
         holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+
+            val intent = Intent(context, NewsByCategory::class.java)
+            intent.putExtra("category", category.name)
+            context.startActivity(intent)
+
+
             Toast.makeText(
                 holder.itemView.context,
                 category.name,
