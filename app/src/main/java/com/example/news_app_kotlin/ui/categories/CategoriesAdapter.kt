@@ -35,12 +35,12 @@ class CategoriesAdapter(private val list: List<Category>) : RecyclerView.Adapter
             intent.putExtra("category", category.name)
             context.startActivity(intent)
 
-
+/*
             Toast.makeText(
                 holder.itemView.context,
                 category.name,
                 Toast.LENGTH_SHORT
-            ).show()
+            ).show()*/
         }
     }
 

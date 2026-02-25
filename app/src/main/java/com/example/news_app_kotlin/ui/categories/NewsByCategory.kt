@@ -19,10 +19,11 @@ class NewsByCategory : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val categoryName = intent.getStringExtra("category")
 
         val toolbar= findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.title="News by category"
+        supportActionBar?.title=categoryName?:"News"
 
         toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
