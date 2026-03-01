@@ -2,8 +2,8 @@ package com.example.news_app_kotlin.ui.common
 
 import com.example.news_app_kotlin.data.remote.models.Article
 
-sealed class UiState {
-    object Loading : UiState()
-    data class Success(val data: List<Article>) : UiState()
-    data class Error(val message: String) : UiState()
+sealed class UiState<out T> {
+    object Loading : UiState<Nothing>()
+    data class Success<T>(val data: T) : UiState<T>()
+    data class Error(val message: String) : UiState<Nothing>()
 }

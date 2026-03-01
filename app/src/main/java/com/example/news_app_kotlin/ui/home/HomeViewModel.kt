@@ -1,6 +1,7 @@
 package com.example.news_app_kotlin.ui.home
 
 import androidx.lifecycle.*
+import com.example.news_app_kotlin.data.remote.models.Article
 import com.example.news_app_kotlin.data.remote.models.NewsResponse
 import com.example.news_app_kotlin.data.repositories.NewsRepository
 import com.example.news_app_kotlin.ui.common.UiState
@@ -11,8 +12,8 @@ import retrofit2.Response
 class HomeViewModel : ViewModel() {
 
     private val repository = NewsRepository()
-    private val _newsState = MutableLiveData<UiState>()
-    val newsState: LiveData<UiState> = _newsState
+    private val _newsState = MutableLiveData<UiState<List<Article>>>()
+    val newsState: LiveData<UiState<List<Article>>> = _newsState
 
     private val _news = MutableLiveData<Response<NewsResponse>>()
     val news: LiveData<Response<NewsResponse>> = _news
@@ -25,7 +26,7 @@ class HomeViewModel : ViewModel() {
 
            try {
 
-               val response = repository.getNews()
+               val response = repository.getLatestNews()
 
                if(response.isSuccessful){
                    val articles = response.body()?.results ?: emptyList()
