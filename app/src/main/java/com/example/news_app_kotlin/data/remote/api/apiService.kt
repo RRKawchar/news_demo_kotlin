@@ -11,10 +11,13 @@ interface ApiService {
     suspend fun getLatestNews(
         @Query("apiKey") apiKey:String
     ): Response<NewsResponse>
-    @GET("v2/top-headlines")
+
+
+    @GET("api/1/latest")
     suspend fun getCategoryNews(
-        @Query("country") country: String,
-        @Query("category") category: String?,
-        @Query("apiKey") apiKey: String
+        @Query("apikey") apiKey: String,
+        @Query("category") category: String,
+        @Query("country") country: String? = null,
+        @Query("language") language: String? = "en"
     ): Response<NewsResponse>
 }

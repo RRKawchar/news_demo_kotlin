@@ -58,7 +58,8 @@ dependencies {
     implementation(libs.retrofit)
 
 
-    implementation(libs.glide)
+    //implementation(libs.glide)
+    implementation(libs.glide.v4120)
 
     // Converts JSON response into Kotlin data classes
     implementation(libs.converter.gson)

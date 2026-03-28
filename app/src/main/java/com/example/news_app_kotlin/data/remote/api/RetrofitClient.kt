@@ -33,7 +33,7 @@ object RetrofitClient {
 
     val getCategoryNews: ApiService by lazy {
         Retrofit.Builder()
-            .baseUrl(ApiConstants.BASE_URL_2)
+            .baseUrl(ApiConstants.BASE_URL_1)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
