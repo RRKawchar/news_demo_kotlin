@@ -90,7 +90,7 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This is a Sample News Title Showing Static Data"
+                android:text=""
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"
@@ -105,13 +105,7 @@
                 android:lineSpacingExtra="6dp"
                 android:textSize="16sp"
                 android:textColor="#444444"
-                android:text="This is static description text for testing UI.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+                android:text=""
                 />
 
             <!-- READ MORE BUTTON -->

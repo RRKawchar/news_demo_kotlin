@@ -3,13 +3,12 @@ package com.example.news_app_kotlin.ui.categories
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.news_app_kotlin.R
 import com.example.news_app_kotlin.data.repositories.NewsRepository
 import com.example.news_app_kotlin.ui.common.UiState
+import com.example.news_app_kotlin.ui.details.NewsDetailsPage
 import com.example.news_app_kotlin.ui.home.NewsAdapter
 import com.google.android.material.appbar.MaterialToolbar
 
@@ -120,16 +120,57 @@ class NewsByCategory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        onBackPressedDispatcher.addCallback(this) {
+
+            val fragmentContainer = findViewById<FrameLayout>(R.id.fragment_container)
+
+            if (fragmentContainer.visibility == View.VISIBLE) {
+
+                supportFragmentManager.popBackStack()
+
+                fragmentContainer.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+
+            } else {
+                finish()
+            }
+        }
+
         setContentView(R.layout.activity_news_by_category)
 
         recyclerView = findViewById(R.id.categoryFVNews)
         progressBar = findViewById(R.id.progressBar)
         tvNotFound = findViewById(R.id.tvNotFound)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        // 3️ Initialize Adapter with click listener
         newsAdapter = NewsAdapter { article ->
-            Toast.makeText(this, article.title, Toast.LENGTH_SHORT).show()
+
+            val bundle = Bundle().apply {
+                putString("title", article.title)
+                putString("description", article.description)
+                putString("image", article.image_url)
+                putString("link", article.link)
+                putString("source_icon", article.source_icon)
+                putString("datatype", article.datatype)
+            }
+
+            val detailsFragment = NewsDetailsPage()
+            detailsFragment.arguments = bundle
+
+            recyclerView.visibility = View.GONE
+            findViewById<FrameLayout>(R.id.fragment_container).visibility = View.VISIBLE
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, detailsFragment)
+                .addToBackStack("details")
+                .commit()
         }
+
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+     /*   newsAdapter = NewsAdapter { article ->
+            Toast.makeText(this,"sdfgjdfgh", Toast.LENGTH_SHORT).show()
+        }*/
         recyclerView.adapter = newsAdapter
 
         val categoryName = intent.getStringExtra("category")
@@ -178,4 +219,7 @@ class NewsByCategory : AppCompatActivity() {
         // Trigger API call
         viewModel.fetchCategoryNews(categoryName)
     }
+
+
+
 }

@@ -1,13 +1,11 @@
 package com.example.news_app_kotlin.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.news_app_kotlin.R
@@ -41,7 +39,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             detailsFragment.arguments = bundle
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, detailsFragment)
-                .addToBackStack(null)
+                .addToBackStack("details")
                 .commit()
             // Uncomment if using Navigation Component
             // findNavController().navigate(R.id.action_homeFragment_to_detailsFragment, bundle)

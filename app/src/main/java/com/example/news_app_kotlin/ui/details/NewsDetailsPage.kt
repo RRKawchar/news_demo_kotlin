@@ -17,15 +17,29 @@ class NewsDetailsPage : Fragment(R.layout.fragment_news_details_page) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         setupToolbar(view)
         receiveAndShowData(view)
 
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+    }
+
+
     //  TOOLBAR SETUP
+
     private fun setupToolbar(view: View) {
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+
+        toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+    }
+  /*  private fun setupToolbar(view: View) {
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
@@ -37,7 +51,7 @@ class NewsDetailsPage : Fragment(R.layout.fragment_news_details_page) {
         toolbar.setNavigationOnClickListener {
             parentFragmentManager.popBackStack()
         }
-    }
+    }*/
 
     //  DATA RECEIVE AND SHOW -
     private fun receiveAndShowData(view: View) {
@@ -50,7 +64,7 @@ class NewsDetailsPage : Fragment(R.layout.fragment_news_details_page) {
         val dataType = arguments?.getString("datatype") ?: ""
 
 
-        // Views এর সাথে Connect করা
+        // Views  Connect করা
         val ivArticleImage = view.findViewById<ImageView>(R.id.ivArticleImage)
         val tvNewsType = view.findViewById<TextView>(R.id.tvNewsType)
         val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
@@ -75,7 +89,7 @@ class NewsDetailsPage : Fragment(R.layout.fragment_news_details_page) {
         if (sourceIcon.isNotEmpty()) {
             // Glide use for fist dependency add
             Glide.with(this)
-                .load(imageUrl)
+                .load(sourceIcon)
                 .placeholder(R.drawable.ic_launcher_foreground) //if loading
                 .error(R.drawable.ic_launcher_foreground) // if error
                 .into(tvSourceIcon)
